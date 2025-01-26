@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+
+service QuestionService {
+  rpc SearchQuestions(SearchRequest) returns (SearchResponse);
+}
+
+
+message SearchRequest {
+  string query = 1; // Search query (e.g., partial title search)
+  string type = 2;  // Filter by type (e.g., "ANAGRAM")
+  int32 page = 3;   // Page number for pagination
+  int32 limit = 4;  // Number of results per page
+}
+
+// Response message for search results
+message SearchResponse {
+  repeated Question questions = 1; // List of questions
+  int32 totalPages = 2;            // Total number of pages
+}
+
+// Message representing a question
+message Question {
+  string title = 1;    // Title of the question
+  string type = 2;     // Type of the question (e.g., "ANAGRAM")
+  string solution = 3; // Solution to the question
+  repeated Block blocks = 4; // List of blocks (letters or elements)
+}
+
+// Message representing a block of a question
+message Block {
+  string text = 1;         // Text of the block (e.g., "T", "O", "Y")
+  bool showInOption = 2;   // Whether this block is shown in the options
+  bool isAnswer = 3;       // Whether this block is part of the answer
+}
