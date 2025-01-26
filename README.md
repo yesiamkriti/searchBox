@@ -21,4 +21,28 @@ In the backend directory, install the required dependencies for gRPC:
 
 ```bash
 npm install grpc @grpc/proto-loader
+```
+## Step 2: Set Up gRPC-Web in the Frontend
+
+### 1. Install Frontend Dependencies
+```bash
+npm install grpc-web
+npm install -g protoc-gen-grpc-web
+```
+
+Generate the JavaScript client code:
+```bash
+protoc -I=proto/ service.proto --js_out=import_style=commonjs:frontend/src --grpc-web_out=import_style=typescript,mode=grpcwebtext:frontend/src
+```
+
+## Step 3: Run the Application
+```bash
+//backend
+node server.js
+//frontend
+npm start
+
+```
+
+
 
